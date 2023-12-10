@@ -48,6 +48,19 @@ struct ContentView: View {
             }
         }
         .frame(maxWidth: 65)
+        .buttonStyle(NextTrack())
+    }
+}
+
+struct NextTrack: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        ZStack {
+            Circle()
+                .foregroundColor(.secondary)
+                .opacity(0.3)
+            configuration.label
+                .padding(12)
+        }
     }
 }
 
