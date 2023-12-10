@@ -57,9 +57,9 @@ struct NextTrack: ButtonStyle {
         ZStack {
             Circle()
                 .foregroundColor(.secondary)
-                .opacity(0.3)
+                .opacity(0.25)
             configuration.label
-                .padding(12)
+                .padding(15)
         }
     }
 }
