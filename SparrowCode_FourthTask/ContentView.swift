@@ -53,13 +53,30 @@ struct ContentView: View {
 }
 
 struct NextTrack: ButtonStyle {
+    @State private var isAction: Bool = false
+    
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
             Circle()
-                .foregroundColor(.secondary)
-                .opacity(0.25)
+                .foregroundStyle(.secondary)
+                .opacity(isAction ? 0.25 : 0)
             configuration.label
                 .padding(15)
+        }
+        .scaleEffect(isAction ? 0.86 : 1)
+        .animation(.easeInOut(duration: 0.22), value: configuration.isPressed)
+        .onChange(of: configuration.isPressed) {
+            if configuration.isPressed {
+                withAnimation(.easeInOut(duration: 0.22)) {
+                    isAction = true
+                }
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
+                    withAnimation(.easeInOut(duration: 0.22)) {
+                        isAction = false
+                    }
+                }
+            }
         }
     }
 }
